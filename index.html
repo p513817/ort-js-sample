@@ -34,6 +34,8 @@
     <script src="common/imagenet.js"></script>
     <script src="common/image-loader.js"></script>
     <script src="index.js"></script>
+    <script src="common/open-cam.js"></script>
+    
     <script>
       const imageSize = 224;
     </script>
@@ -44,7 +46,7 @@
 
 <div class="container my-5">
     <div class="row my-3">
-        <div class="col-12">
+        <div class="col-12 col-md">
             <h1>Image Classification - ResNet50 (ONNX-JS)</h1>
         </div>
     </div>
@@ -52,21 +54,28 @@
 
 <div class="container my-5">
     <div class="row my-3">
-        <div class="col-12 col-md-auto">
+        <!-- <div class="col-12 col-md-auto">
             <canvas id="input_image" width="224" height="224"></canvas>
-        </div>
+        </div> -->
 
         <div class="col-12 col-md container-fluid">
-            <div class="row my-2 form-inline">
+            <!-- <div class="row my-2 form-inline">
                 <div class="form-group">
                     <label class="mr-3" for="image_url">Image URL</label>
                     <input class="form-control mr-3" type="text" id="image_url" value="./aeroplane.jpg" size="60">
                 </div>
                 <button class="btn" type="button" onclick="imgSet()">Load</button>
-            </div>
+            </div> -->
 
+            <div>
+              <video autoplay id="stream"></video>
+              <canvas id="canvas" width="0" height="0" hidden></canvas>
+              <button class="btn" type="button" onclick="openCam()" hidden >Camera</button>
+              <button class="btn" type="button" onclick="captureCam()" hidden >Capture</button>
+            </div>
             <div class="row mt-5">
-                <button class="btn btn-block btn-primary" id="run_button" type="button" onclick="runExample();" disabled>Run</button>
+                <button class="btn btn-block btn-primary" id="run_button" type="button" onclick="loopInfer();">Run</button>
+                <button class="btn btn-block btn-primary" id="stop_button" type="button" onclick="stopInfer();">Stop</button>
                 <!-- <input type="button" id="run_button" value="Run" onclick="runExample()"> -->
               </div>
         </div>
