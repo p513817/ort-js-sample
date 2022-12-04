@@ -16,7 +16,8 @@ async function loadModel() {
   session = new onnx.InferenceSession({ backendHint: 'webgl' });
 
   // Load an ONNX model. This model is Resnet50 that takes a 1*3*224*224 image and classifies it.
-  await session.loadModel("./resnet50_8.onnx");
+  await session.loadModel("./model/resnet50_8.onnx");
+  // await session.loadModel("./model/mobilenetv2-1.0.onnx");
   console.log("model loaded!")
 
   // await imgSet();
