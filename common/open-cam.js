@@ -1,10 +1,10 @@
-function openCam() {
+async function openCam() {
 
     const constraints = {
         video: true
     }
-    console.log('Open Camera ...');
-    getCameraSelection();
+    // console.log('Open Camera ...');
+    // getCameraSelection();
     if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices) {
         const updatedConstraints = {
             ...constraints,

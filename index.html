@@ -26,75 +26,79 @@
 <html>
 
 <head>
-    <title>Image Classification - ResNet50 (ONNX-JS)</title>
-    <meta charset="utf-8">
-    <script src="webdnn.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
-    <script src="common/ndarray-browser-min.js"></script>
-    <script src="common/imagenet.js"></script>
-    <script src="common/image-loader.js"></script>
-    <script src="index.js"></script>
-    <script src="common/open-cam.js"></script>
-    
-    <script>
-      const imageSize = 224;
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <title>Image Classification - ResNet50 (ONNX-JS)</title>
+  <meta charset="utf-8">
+  <script src="webdnn.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+  <script src="common/ndarray-browser-min.js"></script>
+  <script src="common/imagenet.js"></script>
+  <script src="common/image-loader.js"></script>
+  <script src="index.js"></script>
+  <script src="common/open-cam.js"></script>
+
+  <script>
+    const imageSize = 224;
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 </head>
 
 <body onload="loadModel()">
 
-<div class="container my-5">
+  <!-- <div class="container my-5">
     <div class="row my-3">
-        <div class="col-12 col-md">
+      <div class="col-12 col-md">
+        <h1>Image Classification - ResNet50 (ONNX-JS)</h1>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container">
+    <div class="row align-items-center vh-100">
+      <div class="col-12 my-5 mx-auto">
+        <div class="card shadow border">
+          <div class="card-header">
             <h1>Image Classification - ResNet50 (ONNX-JS)</h1>
-        </div>
-    </div>
-</div>
+          </div>
+          <div class="card-body d-flex flex-column align-items-center">
 
-<div class="container my-5">
-    <div class="row my-3">
-        <!-- <div class="col-12 col-md-auto">
-            <canvas id="input_image" width="224" height="224"></canvas>
-        </div> -->
-
-        <div class="col-12 col-md container-fluid">
-            <!-- <div class="row my-2 form-inline">
-                <div class="form-group">
-                    <label class="mr-3" for="image_url">Image URL</label>
-                    <input class="form-control mr-3" type="text" id="image_url" value="./aeroplane.jpg" size="60">
-                </div>
-                <button class="btn" type="button" onclick="imgSet()">Load</button>
-            </div> -->
-
-            <div>
-              <video autoplay id="stream"></video>
-              <canvas id="canvas" width="0" height="0" hidden></canvas>
-              <button class="btn" type="button" onclick="openCam()" hidden >Camera</button>
-              <button class="btn" type="button" onclick="captureCam()" hidden >Capture</button>
-            </div>
-            <div class="row mt-5">
-                <button class="btn btn-block btn-primary" id="run_button" type="button" onclick="loopInfer();">Run</button>
-                <button class="btn btn-block btn-primary" id="stop_button" type="button" onclick="stopInfer();">Stop</button>
-                <!-- <input type="button" id="run_button" value="Run" onclick="runExample()"> -->
+            <!-- Display Image -->
+            <div class="row">
+              <div class="col">
+                <!-- <canvas id="input_image" width="224" height="224"></canvas> -->
+                <video autoplay id="stream"></video>
               </div>
+              <!-- Display Information -->
+              <div class="col align-items-center">
+                <div class="row">
+                  <div class="col-12" id="predictions">Print predictions</div>
+                  <div class="col-12" id="messages">Message</div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-12">
+                    <button class="btn btn-block btn-primary" id="run_button" type="button" 
+                      onclick="loopInfer();">Run</button>
+                    <button class="btn btn-block btn-primary" id="stop_button" type="button"
+                      onclick="stopInfer();">Stop</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+              the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
-
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12" id="predictions"></div>
   </div>
-</div>
 
-
-<div class="container my-5">
-    <div class="row">
-        <div class="col-12" id="messages"></div>
-    </div>
-</div>
+  <div hidden>
+    <canvas id="canvas" width="0" height="0"></canvas>
+    <button class="btn" type="button" onclick="openCam()">Camera</button>
+    <button class="btn" type="button" onclick="captureCam()">Capture</button>
+  </div>
 
 </body>
 

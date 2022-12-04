@@ -9,6 +9,8 @@ function log(msg) {
 }
 
 async function loadModel() {
+  
+  openCam();
   // Create an ONNX inference session with WebGL backend.
   // Can be 'cpu' or 'wasm'
   session = new onnx.InferenceSession({ backendHint: 'webgl' });
@@ -16,9 +18,8 @@ async function loadModel() {
   // Load an ONNX model. This model is Resnet50 that takes a 1*3*224*224 image and classifies it.
   await session.loadModel("./resnet50_8.onnx");
   console.log("model loaded!")
+
   // await imgSet();
-  openCam();
-  document.getElementById('run_button').disabled = false;
 }
 
 async function imgSet() {
@@ -35,6 +36,7 @@ async function imgSet() {
 let inter;
 
 async function runExample() {
+  
   // Load image.
   const imageLoader = new ImageLoader(imageSize, imageSize);
   // const imageData = await imageLoader.getImageData(document.getElementById("image_url").value);
@@ -61,6 +63,7 @@ async function runExample() {
 }
 
 async function loopInfer() {
+
   await runExample();
   inter = setInterval(runExample, 10);
   console.log('Start Interval: ', inter);
